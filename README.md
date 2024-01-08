@@ -1,1 +1,1 @@
-# web-crawling-study
+파이썬과 bs4를 활용한 웹 크롤링 공부
