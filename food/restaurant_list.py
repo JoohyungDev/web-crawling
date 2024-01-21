@@ -76,13 +76,13 @@ def restaurant_list_print():
 
     time.sleep(0.2)
 
-		# 장소 목록
+    # 장소 목록
     restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
 
     for index in range(len(restaurant_list)):
         # print(index)  # 현재 인덱스 출력
 
-				# 음식점 이름
+	# 음식점 이름
         names = driver.find_elements(By.CSS_SELECTOR, '.head_item > .tit_name > .link_name')
 
         # 평점
@@ -101,10 +101,10 @@ def restaurant_list_print():
         # 상세 페이지로 이동하여 메뉴 이름, 가격 가져오는 함수 호출
         menu_name, menu_price = get_menu_from_detail_page(details_value)  
 
-		    # 카테고리
+	# 카테고리
         types = driver.find_elements(By.CSS_SELECTOR, '.head_item > .subcategory')
 
-		    # 주소
+	# 주소
         address = driver.find_elements(By.CSS_SELECTOR, '.addr')
 
         restaurant_name = names[index].text
@@ -155,14 +155,14 @@ def restaurant_list_print():
 # css를 찾을때 까지 10초 대기
 time_wait(10, 'div.box_searchbar > input.query')
 
-# (1) 검색창 찾기
+# 검색창 찾기
 search = driver.find_element(By.CSS_SELECTOR, 'div.box_searchbar > input.query')
 search.send_keys(key_word)  # 검색어 입력
 search.send_keys(Keys.ENTER)  # 엔터버튼 누르기
 
 sleep(1)
 
-# (2) 장소 탭 클릭
+# 장소 탭 클릭
 place_tab = driver.find_element(By.CSS_SELECTOR, '#info\.main\.options > li.option1 > a')
 place_tab.send_keys(Keys.ENTER)
 
@@ -189,18 +189,18 @@ while 1:  # while 1에서 변경
         page2 += 1
         print("**", page, "**")
 
-				# (7) 페이지 번호 클릭
+	# 페이지 번호 클릭
         driver.find_element(By.XPATH, f'//*[@id="info.search.page.no{page2}"]').send_keys(Keys.ENTER)
 
-				# 음식점 리스트 크롤링
+	# 음식점 리스트 크롤링
         restaurant_list_print()
 
-				# 해당 페이지 음식점 리스트
+	# 해당 페이지 음식점 리스트
         restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
-				# 한 페이지에 장소 개수가 15개 미만이라면 해당 페이지는 마지막 페이지
+	# 한 페이지에 장소 개수가 15개 미만이라면 해당 페이지는 마지막 페이지
         if len(restaurant_list) < 15:
             break
-				# 다음 버튼을 누를 수 없다면 마지막 페이지
+	# 다음 버튼을 누를 수 없다면 마지막 페이지
         if not driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').is_enabled():
             break
 
@@ -229,7 +229,3 @@ driver.quit()  # 작업이 끝나면 창을 닫는다.
 # # csv 파일로 저장
 df = pd.DataFrame(restaurant_dict['음식점정보'])
 df.to_csv('./청담동_맛집.csv', index=False, encoding='utf-8-sig')
-
-# 633초(10분)
-# 578초(9분) -> 크롬 안열고 실행했을
-
