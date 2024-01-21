@@ -60,7 +60,7 @@ def get_menu_from_detail_page(detail_page_url):
         price_element = WebDriverWait(driver, 1).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "em.price_menu"))
         )
-        price_text = price_element.text.replace("가격: ", "")  # "가격: " 문자열을 제거합니다.
+        price_text = price_element.text.replace("가격: ", "")  # "가격: " 문자열을 제거
 
     except Exception as e:
         print("상세 페이지에서 메뉴 정보를 찾는 데 실패했습니다:", e)
